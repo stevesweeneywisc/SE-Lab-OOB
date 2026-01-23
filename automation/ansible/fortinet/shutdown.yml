@@ -1,0 +1,38 @@
+---
+
+  - name: Shutdown VM 
+    hosts: "{{ hosts_group }}" 
+    connection: httpapi 
+    collections:
+      - fortinet.fortios
+
+    vars:
+      vdom: "root"
+      ansible_httpapi_use_ssl: true 
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 443 
+      ansible_network_os: fortinet.fortios.fortios
+      ansible_facts_modules: setup
+      # Use the initial login credentials from the inventory
+      ansible_user: "admin"
+      ansible_password: "password"
+
+    tasks:
+
+      - name: Execute ICMP ping
+        command: ping -c 2 {{ inventory_hostname }}
+        register: ping_result
+        ignore_errors: true # Continue even if ping fails
+
+      - name: Shutdown VM 
+        fortinet.fortios.fortios_monitor:
+          vdom: "{{ vdom }}"
+          selector: 'shutdown.system.os'
+        register: vm_info
+        when: 
+          - inventory_hostname  != "FGT-Hub-01b" 
+          - ping_result.rc == 0                   # Assuming 0 for success
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"

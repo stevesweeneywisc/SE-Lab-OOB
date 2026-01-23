@@ -1,0 +1,11 @@
+---
+  - name: Create SDN and VNETs   
+    hosts: {{ pve_node }} 
+    tasks:
+      - name: Run script to create SDN and VNETs 
+        ansible.builtin.script: ./Create_VNETs.sh 
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"

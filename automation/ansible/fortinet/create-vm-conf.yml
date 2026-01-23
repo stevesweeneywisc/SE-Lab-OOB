@@ -1,0 +1,29 @@
+---
+      - name: Create new Fortinet VM 
+        community.proxmox.proxmox_kvm:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          node: "{{ pve_node }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          cores: "{{ item.cores }}" 
+          vcpus: "{{ item.vcpus }}" 
+          cpu: x86-64-v2-AES
+          ide: 
+            ide2: 'none,media=cdrom'
+          memory: "{{ item.memory }}" 
+          net:
+            net0: 'virtio,bridge=VLAN1001'
+            net1: 'virtio,bridge=VLAN1001'
+            net2: 'virtio,bridge=VLAN1001'
+            net3: 'virtio,bridge=VLAN1001'
+          scsihw: virtio-scsi-single
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: " {{ item.msg }}"
+        loop: "{{ vm_info.results }}"

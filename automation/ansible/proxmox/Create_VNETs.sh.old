@@ -1,0 +1,28 @@
+pvesh create /cluster/sdn/zones --type vlan --zone SELab --ipam pve --bridge vmbr0
+pvesh create /cluster/sdn/vnets --vnet FTNT_MGT --zone SELab --alias FTNT_MGT    --tag 1001 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN1 --zone SELab --alias Branch_WAN1 --tag 1101 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN2 --zone SELab --alias Branch_WAN2 --tag 1102 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN3 --zone SELab --alias Branch_WAN3 --tag 1103 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN4 --zone SELab --alias Branch_WAN4 --tag 1104 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN5 --zone SELab --alias Branch_WAN5 --tag 1105 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN6 --zone SELab --alias Branch_WAN6 --tag 1106 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN7 --zone SELab --alias Branch_WAN7 --tag 1107 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_WAN8 --zone SELab --alias Branch_WAN8 --tag 1108 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_LAN1 --zone SELab --alias Branch_LAN1 --tag 1151 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_LAN2 --zone SELab --alias Branch_LAN2 --tag 1152 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_LAN3 --zone SELab --alias Branch_LAN3 --tag 1153 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet BRA_LAN4 --zone SELab --alias Branch_LAN4 --tag 1154 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet COR_WAN1 --zone SELab --alias Core_WAN1   --tag 1201 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet COR_WAN2 --zone SELab --alias Core_WAN2   --tag 1202 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet COR_WAN3 --zone SELab --alias Core_WAN3   --tag 1203 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet COR_WAN4 --zone SELab --alias Core_WAN4   --tag 1204 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet DMZ_01   --zone SELab --alias DMZ_01      --tag 1275 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet DMZ_02   --zone SELab --alias DMZ_02      --tag 1276 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet HA_HUB01 --zone SELab --alias HA_HUB01    --tag 1291 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet HA_HUB02 --zone SELab --alias HA_HUB02    --tag 1292 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet OFF_NET  --zone SELab --alias OFF_NET     --tag 1301 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet MFGLINE1 --zone SELab --alias MFG_Line01  --tag 1401 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet MFGLINE2 --zone SELab --alias MFG_Line02  --tag 1402 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet MFGLINE3 --zone SELab --alias MFG_Line03  --tag 1403 --vlanaware 1
+pvesh create /cluster/sdn/vnets --vnet MFGLINE4 --zone SELab --alias MFG_Line04  --tag 1404 --vlanaware 1
+pvesh set /cluster/sdn

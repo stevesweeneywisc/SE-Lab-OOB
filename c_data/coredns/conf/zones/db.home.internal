@@ -1,0 +1,53 @@
+$ORIGIN home.internal.
+$TTL 1h
+@             IN  SOA (
+                  ns.fortinet.inernal.     ; primary nameserver
+                  .                        ; zone-admin email
+                  1                        ; serial number
+                  24h                      ; refresh interval
+                  2h                       ; retry interval
+                  1000h                    ; expire interval
+                  10m                      ; negative TTL
+              )
+              IN NS ns.fortinet.internal.
+
+oob           IN  A   172.16.3.80
+ubuntu-oob    IN  CNAME oob
+
+pve01         IN  A   172.16.3.121
+pve02         IN  A   172.16.3.122
+pve03         IN  A   172.16.3.123
+pve-iac       IN  A   172.16.3.130
+esxi04        IN  A   172.16.3.120
+
+tcgui         IN  A   172.16.3.90
+ubuntu-tcgui  IN  CNAME tcgui
+fac           IN  A   172.16.3.9
+
+ubuntu-00     IN  A   172.16.3.70
+ubuntu-01     IN  A   172.16.3.71
+ubuntu-02     IN  A   172.16.3.72
+ubuntu-03     IN  A   172.16.3.73
+ubuntu-04     IN  A   172.16.3.74
+ubuntu-05     IN  A   172.16.3.75
+ubuntu-06     IN  A   172.16.3.76
+
+ubuntu-11     IN  A   172.16.3.81
+ubuntu-12     IN  A   172.16.3.82
+ubuntu-13     IN  A   172.16.3.83
+ubuntu-14     IN  A   172.16.3.84
+
+ubuntu-21     IN  A   172.16.3.98
+ubuntu-22     IN  A   172.16.3.99
+
+fgt-hub-01a   IN  A   172.16.3.51
+fgt-hub-01b   IN  A   172.16.3.52
+fgt-hub-02a   IN  A   172.16.3.53
+fgt-hub-02b   IN  A   172.16.3.54
+fgt-branch-01 IN  A   172.16.3.55
+fgt-branch-02 IN  A   172.16.3.56
+fgt-branch-03 IN  A   172.16.3.57
+fgt-branch-04 IN  A   172.16.3.58
+
+fmg           IN  A   172.16.3.12
+faz           IN  A   172.16.3.2

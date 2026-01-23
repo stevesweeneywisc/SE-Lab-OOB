@@ -1,0 +1,26 @@
+---
+- name: Get information of target entitlements.
+ 
+  hosts: localhost
+  
+  tasks:
+    - name: Get PrePaid Entitlements List
+      fortinet.fortiflexvm.fortiflexvm_entitlements_update:
+        username: "{{ fortiflex_username }}"
+        password: "{{ fortiflex_password }}"
+        # Either configId or (accountId and programSerialNumber) should be provided.
+        accountId: "{{ fortiflex_accountId }}" 
+        programSerialNumber: "{{ fortiflex_postpaid_SN }}"
+
+        # Optional filter options
+        # description: "you can use description to distinguish entitlements"
+        # serialNumber: "XXXXXX0000000000"
+        status: "STOPPED"
+        # tokenStatus: "NOTUSED"
+      register: result
+
+    - name: Save entitlement info to file on control node
+      copy:
+        content: "{{ result.entitlements }}"
+        dest: /home/fortinet/automation/ansible/fortiflex/entitlements-pre-stopped.txt
+      delegate_to: localhost

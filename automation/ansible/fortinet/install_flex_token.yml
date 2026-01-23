@@ -1,0 +1,34 @@
+---
+
+  - name: Install FortiFlex Token to FortiGate 
+    hosts: "{{ hosts_group }}" 
+    connection: httpapi 
+    collections:
+      - fortinet.fortios
+
+    vars:
+      vdom: "root"
+      ansible_httpapi_use_ssl: false 
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 80 
+      ansible_network_os: fortinet.fortios.fortios
+      ansible_facts_modules: setup
+      # Use the initial login credentials from the inventory
+      ansible_user: "admin"
+      ansible_password: "password"
+#      ansible_httpapi_session_key={"access_token":"YOUR_OWN_VALUE"}
+
+    tasks:
+
+      - name: Download license 
+        fortinet.fortios.fortios_monitor:
+          vdom: "{{ vdom }}"
+          selector: 'download.system.vmlicense'
+          params:
+#            token: "{{ lookup( 'file', './license/{{ inventory_hostname }}.lic') | string | b64encode }}"
+            token: "{{ lookup( 'file', './license/{{ inventory_hostname }}.lic') | string }}"
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info.results }}"

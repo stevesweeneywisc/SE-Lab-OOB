@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  vars_files:
+    - ../vars/global.yml
+    - "{{ host_vars_file }}"
+  vars:
+    # ======== Below used to execute script on Fortigate Device ==========
+    firewall_group_name: 'firwalladdressgroup0'
+    firewall_address_name: 'firewalladdress0'
+    # =====================================================================
+    script_path: './tmp/'
+    ansible_password: "{{ 'Endus3r12!' if group_name == 'fmg_faz' else 'password' }}"
+
+  tasks:
+   - name: Prepare The Shell Scrit Template.
+     raw: |
+            cat > {{ script_path }}{{ item.name }}.shell.task << EOF_OUTER
+            # /bin/bash
+            # Please make sure tool sshpass is installed. e.g. on Debian/Ubuntu, apt-get install sshpass.
+            # Optionally you can pass some parameters.
+            # The character `a` at second line below is to avoid post-login-banner barrier.
+            sshpass -p '{{ fortinet_password }}' ssh -o StrictHostKeyChecking=no {{ fortinet_user }}@{{ item.name }} <<EOF
+            a
+            # ====================== Edit Your Commands Below =============================================
+            #execute vm-license {{ lookup( 'file', './FGT-Branch-01.lic') | string }}
+            config system global
+            set timezone "Central/US"
+            end
+            # ==============================================================================================
+            EOF
+            EOF_OUTER
+     loop: "{{ lookup('vars',  group_name)  }}"
+     when: item.name  != "FGT-Hub-01b" 
+
+   - name: Execute The Cli Commands.
+     raw: |
+            chmod +x {{ script_path }}{{ item.name }}.shell.task && {{ script_path }}{{ item.name }}.shell.task '{{ firewall_group_name }}' '{{ firewall_address_name }}'
+     args:
+       executable: /bin/bash
+     loop: "{{ lookup('vars',  group_name)  }}"
+     when: item.name  != "FGT-Hub-01b" 

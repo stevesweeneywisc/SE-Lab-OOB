@@ -1,0 +1,24 @@
+---
+      - name: Create Log Disk 
+        community.proxmox.proxmox_disk:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          disk: scsi1
+          backup: false
+          format: qcow2
+          iothread: True
+          storage: "{{ proxmox_storage_name }}" 
+          size: "{{ item.logsize }}" 
+          state: present
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: " {{ item.msg }}"
+        loop: "{{ vm_info.results }}"
+

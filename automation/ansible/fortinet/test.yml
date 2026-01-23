@@ -1,0 +1,11 @@
+---
+  - name: 
+    hosts: localhost
+    vars_files:
+      - ../vars/global.yml
+
+    tasks:
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ lookup( 'file', './FGT-Branch-01.lic') | string }}"

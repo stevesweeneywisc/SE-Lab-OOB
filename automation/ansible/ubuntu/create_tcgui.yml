@@ -1,0 +1,266 @@
+---
+  - name: Creae TCGUI from Cloud Init Template 
+    hosts: "{{ pve_node }}" 
+    vars_files:
+      - ../vars/global.yml
+      - "{{ host_vars_file }}"
+    tasks:
+      - name: Clone Ubuntu cloud-init VM 
+        community.proxmox.proxmox_kvm:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          clone: "{{ proxmox_ubuntu_template_name }}"
+          vmid: "{{ proxmox_ubuntu_template_vmid }}"
+          newid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          node: "{{ pve_node }}" 
+          storage: "{{ proxmox_storage_name }}" 
+          format: "{{ proxmox_format }}" 
+          timeout: 300
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's cloud-init variables 
+        community.proxmox.proxmox_kvm:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          node: "{{ pve_node }}" 
+          ciuser: "{{ proxmox_ubuntu_ciuser }}" 
+          cipassword: "{{ proxmox_ubuntu_cipassword }}" 
+          searchdomains: "{{ proxmox_ubuntu_search_domains }}" 
+          nameservers: "172.16.3.80" 
+          ipconfig:
+            ipconfig0:  "{{ item.ipconfig0 }}" 
+            ipconfig1:  "{{ item.ipconfig1 }}" 
+            ipconfig2:  "{{ item.ipconfig2 }}" 
+            ipconfig3:  "{{ item.ipconfig3 }}" 
+            ipconfig4:  "{{ item.ipconfig4 }}" 
+            ipconfig5:  "{{ item.ipconfig5 }}" 
+            ipconfig6:  "{{ item.ipconfig6 }}" 
+            ipconfig7:  "{{ item.ipconfig7 }}" 
+            ipconfig8:  "{{ item.ipconfig8 }}" 
+            ipconfig9:  "{{ item.ipconfig9 }}" 
+            ipconfig10: "{{ item.ipconfig10 }}" 
+            ipconfig11: "{{ item.ipconfig11 }}" 
+          sshkeys: "{{ proxmox_IaC_sshkey }}"
+          update: true 
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC0
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net0
+          bridge: "{{ item.vlanconfig0 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC1
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net1
+          bridge: "{{ item.vlanconfig1 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC2
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net2
+          bridge: "{{ item.vlanconfig2 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC3
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net3
+          bridge: "{{ item.vlanconfig3 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC4
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net4
+          bridge: "{{ item.vlanconfig4 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC5
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net5
+          bridge: "{{ item.vlanconfig5 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC6
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net6
+          bridge: "{{ item.vlanconfig6 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC7
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net7
+          bridge: "{{ item.vlanconfig7 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC8
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net8
+          bridge: "{{ item.vlanconfig8 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC9
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net9
+          bridge: "{{ item.vlanconfig9 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC10
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net10
+          bridge: "{{ item.vlanconfig10 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the cloned Ubuntu VM's NIC11
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}" 
+          api_token_secret: "{{ proxmox_api_token_secret }}" 
+          api_host: "{{ proxmox_api_host }}" 
+          vmid: "{{ item.vmid }}" 
+          name: "{{ item.name }}" 
+          interface: net11
+          bridge: "{{ item.vlanconfig11 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"

@@ -1,0 +1,57 @@
+---
+  all:
+    children:
+      fortigate_sdwan:
+        hosts:
+          FGT-Hub-01a: 
+          FGT-Hub-01b: 
+          FGT-Hub-02a: 
+          FGT-Branch-01: 
+          FGT-Branch-02: 
+          FGT-Branch-03: 
+
+      fortigate_hub_ha:
+        hosts:
+          FGT-Hub-01a:
+            ha_priority: 205 
+          FGT-Hub-01b: 
+            ha_priority: 120 
+
+      fmg_faz:
+        hosts:
+          FMG:
+          FAZ: 
+
+      fmg:
+        hosts:
+          FMG:
+
+      faz:
+        hosts:
+          FAZ: 
+
+      ubuntu_mgt:
+        hosts:
+          Ubuntu-OOB:
+          Ubuntu-TCGUI:
+
+      ubuntu_tcgui:
+        hosts:
+          Ubuntu-TCGUI:
+
+      ubuntu_sdwan:
+        hosts:
+          Ubuntu-00:
+          Ubuntu-01:
+          Ubuntu-02:
+          Ubuntu-03:
+          Ubuntu-11:
+          Ubuntu-21:
+
+      proxmox:
+        hosts:
+          pve01:
+        vars:
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_ssh_user: root
+          ansible_ssh_private_key_file: ~/.ssh/id_rsa

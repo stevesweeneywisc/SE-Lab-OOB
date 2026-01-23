@@ -1,0 +1,67 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Proxmox VE: 
+    - PVE-01:
+        icon: /images/proxmox.png
+        href: https://172.16.3.121:8006
+        ping: 172.16.3.121
+        statusStyle: 'dot'
+        widget:
+           type: proxmox
+           url: https://172.16.3.121:8006
+           username: Homepage@pam!api-readonly 
+           password: cacf9beb-9849-425b-a146-c3ab908f844e 
+           node: pve01
+
+    - PVE-02:
+        icon: /images/proxmox.png
+        href: https://172.16.3.122:8006
+        ping: 172.16.3.122
+        statusStyle: 'dot'
+        widget:
+           type: proxmox
+           url: https://172.16.3.122:8006
+           username: Homepage@pam!api-readonly 
+           password: cacf9beb-9849-425b-a146-c3ab908f844e 
+           node: pve02
+
+    - PVE-03:
+        icon: /images/proxmox.png
+        href: https://172.16.3.123:8006
+        ping: 172.16.3.123
+        statusStyle: 'dot'
+        widget:
+           type: proxmox
+           url: https://172.16.3.123:8006
+           username: Homepage@pam!api-readonly 
+           password: cacf9beb-9849-425b-a146-c3ab908f844e 
+           node: pve03
+
+    - PVE-IaC:
+        icon: /images/proxmox.png
+        href: https://172.16.3.102:8006
+        ping: 172.16.3.102
+        statusStyle: 'dot'
+        widget:
+           type: proxmox
+           url: https://172.16.3.102:8006
+           username: api@pam!homepage
+           password: c17363aa-1e52-4a29-87bb-c75718538ca3
+           node: pve-IaC
+
+- TrueNAS: 
+    - TrueNAS:
+        icon: /images/TrueNAS.png
+        href: https://172.16.3.124
+        ping: 172.16.3.124
+        statusStyle: 'dot'
+        widget:
+           type: truenas
+           url: http://172.16.3.124
+           username: user # not required if using api key
+           password: pass # not required if using api key
+           key: 2-k1cL6PhdabBMhf545uGkJZKDuRS9OYGaWHyK4UuUIVdeKSyTVTMxfu8ZODInqgkX  # not required if using username / password
+           enablePools: true # optional, defaults to false
+           nasType: scale # defaults to scale

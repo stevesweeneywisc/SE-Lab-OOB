@@ -1,0 +1,71 @@
+config system admin
+    edit admin
+    set password password
+end
+diag sys forticonverter set-prompt-visibility hidden
+config system interface
+    edit "port1"
+        unset mode
+        set ip 10.198.7.2 255.255.255.248
+        set allowaccess ping
+        set alias "WAN1"
+        set estimated-upstream-bandwidth 1544
+        set estimated-downstream-bandwidth 1544
+    set role wan
+    next
+    edit "port2"
+        set ip 10.198.8.2 255.255.255.248
+        set allowaccess ping
+        set alias "WAN2"
+        set estimated-upstream-bandwidth 1544
+        set estimated-downstream-bandwidth 1544
+    set role wan
+    next
+    edit "port3"
+        set ip 10.100.88.1 255.255.255.0
+        set allowaccess ping
+        set alias "LAN"
+    next
+    edit "port4"
+        set ip 10.100.55.51 255.255.255.0
+        set allowaccess ping https ssh http fgfm
+        set alias "Management"
+    next
+    edit "port5"
+        set ip 10.100.77.1 255.255.255.0
+        set allowaccess ping
+        set alias "LAN"
+    next
+end
+config router static
+    edit 1
+        set gateway 10.198.7.1
+        set device "port1"
+    next
+    edit 2
+        set gateway 10.198.8.1
+        set device "port2"
+    next
+end
+config firewall address
+    edit "Hub1_Datacenter"
+        set subnet 10.100.88.0 255.255.255.0
+    next
+    edit "Hub1_DMZ"
+        set subnet 10.100.77.0 255.255.255.0
+    next
+end
+config firewall policy
+    edit 1
+        set name "Direct Internet Access"
+        set srcintf "port3"
+        set dstintf "port1" "port2"
+        set action accept
+        set srcaddr "Hub1_Datacenter" "Hub1_DMZ"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+        set logtraffic all
+        set nat enable
+    next
+end

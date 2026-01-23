@@ -1,0 +1,11 @@
+---
+  - name: Update Wallpaper on Ubuntu  
+    hosts: "{{ group_name }}" 
+    tasks:
+      - name: Run script to update Wallpaper on Ubuntu 
+        ansible.builtin.script: ./wallpaper-update-script.sh {{ inventory_hostname }} 
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"

@@ -1,0 +1,19 @@
+---
+  - name: Copy FortiGate bootstrap ISO files from control node to PVE  
+    hosts: "{{ pve_node }}" 
+    vars_files:
+      - ../vars/global.yml
+      - "{{ host_vars_file }}"
+    tasks:
+      - name: Copy FortiGate bootstrap ISO files from control node to PVE
+        ansible.builtin.copy:
+          src: "{{ item }}" #  with_items or with_fileglob, {{ item }} dynamically takes value of each element in the list or each file matched by the glob pattern.
+          dest: "{{ proxmox_storage }}/template/iso/"
+          force: true
+        with_fileglob:
+          - ../bootstrap-flex/ISO/*.iso
+        register: result 
+
+      - name: Display result of file copy  
+        debug:
+          msg: "{{ result }}"

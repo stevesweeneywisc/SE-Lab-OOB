@@ -1,0 +1,31 @@
+---
+
+  ### Used with flex-regenerate-token module
+  ###   REPLACE SN's below with your SN's from FortiCare  
+  
+  fortigate_sdwan:
+    - name: FGT-Hub-01a 
+      serialnumber: FGVMMLTM25013032
+
+    - name: FGT-Hub-01b 
+      serialnumber: FGVMMLTM25013033
+
+    - name: FGT-Hub-02a 
+      serialnumber: FGVMMLTM25013034
+
+    - name: FGT-Branch-01 
+      serialnumber: FGVMMLTM25013035
+
+    - name: FGT-Branch-02 
+      serialnumber: FGVMMLTM25013036
+
+    - name: FGT-Branch-03 
+      serialnumber: FGVMMLTM25013037
+
+  fmg:
+    - name: FMG 
+      serialnumber: FMVMMLTM25001665
+
+  faz:
+    - name: FAZ 
+      serialnumber: FZVMMLTM25001693

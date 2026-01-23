@@ -1,0 +1,93 @@
+---
+
+  - name: Configure FortiGates - Global and System Settings, FortiGuard, Nameserver, Central Management 
+    hosts: "{{ hosts_group }}" 
+    connection: httpapi 
+    collections:
+      - fortinet.fortios
+
+    vars_files:
+      - ../vars/global.yml
+
+    vars:
+      vdom: "root"
+      ansible_httpapi_use_ssl: true 
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 443 
+      ansible_network_os: fortinet.fortios.fortios
+      ansible_facts_modules: setup
+      # Use the initial login credentials from the inventory
+      ansible_user: "{{ fortinet_user }}"
+      ansible_password: "{{ fortinet_password }}"
+#      ansible_httpapi_session_key={"access_token":"YOUR_OWN_VALUE"}
+
+    tasks:
+
+      ###############################################################
+      - name: Configure Global Settings
+        fortinet.fortios.fortios_system_global:
+          vdom: "{{ vdom }}"
+          system_global:
+            admin_server_cert: "self-sign"
+            admintimeout: 480
+            alias: "{{ inventory_hostname }}" 
+            gui_app_detection_sdwan: "enable"
+            gui_auto_upgrade_setup_warning: "enable"
+            hostname: "{{ inventory_hostname }}"
+            log_uuid_address: "enable"
+            sslvpn_web_mode: "enable"
+            timezone: "{{ fortinet_timezone }}"
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+      ###############################################################
+      - name: Configure System Settings
+        fortinet.fortios.fortios_system_settings:
+          vdom: "{{ vdom }}"
+          system_settings: 
+            gui_multiple_interface_policy: "enable"
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+      - name: Configure FortiGuard - Disable Auto Firmware Upgrade 
+        fortinet.fortios.fortios_system_fortiguard:
+          vdom: "{{ vdom }}"
+          system_fortiguard:
+            auto_firmware_upgrade: "disable"
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+      - name: Configure System DNS 
+        fortinet.fortios.fortios_system_dns:
+          vdom: "{{ vdom }}"
+          system_dns:
+            domain: [{"domain" : "fortinet.internal"}]
+            primary: "10.100.55.80"
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+      - name: Configure Central Management - FortiManager
+        fortinet.fortios.fortios_system_central_management:
+          vdom: "{{ vdom }}"
+          system_central_management:
+            type: "fortimanager"
+            fmg: "10.100.55.12"
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"

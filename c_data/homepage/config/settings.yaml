@@ -1,0 +1,27 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+
+title: SE Lab
+theme: light # or dark
+headerStyle: underlined #boxed
+showStats: true
+#background: /images/fortinet.png 
+fiveColumns: true 
+layout:
+    Fabric:
+    FortiGate (GUI): 
+    FortiGate (SSH): 
+    Endpoints (RDP):
+    Endpoints (SSH):
+    Tools:
+    Infrastructure:
+#      header: true
+#      style: row
+    Proxmox VE:
+      header: true
+      style: row

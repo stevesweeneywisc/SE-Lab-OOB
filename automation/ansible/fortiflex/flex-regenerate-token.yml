@@ -1,0 +1,25 @@
+---
+
+
+  - name: Regenerate token
+
+    hosts: localhost
+
+    vars_files:
+      - ../vars/global.yml
+      - "{{ serial_number_vars_file }}"
+    
+    tasks:
+      - name: Regenerate token
+        fortinet.fortiflexvm.fortiflexvm_entitlements_vm_regenerate_token:
+          username: "{{ fortiflex_username }}"
+          password: "{{ fortiflex_password }}"
+          serialNumber: "{{ item.serialnumber }}" 
+          regenerate: true 
+        register: result
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+
+      - name: Display response
+        ansible.builtin.debug:
+          var: result

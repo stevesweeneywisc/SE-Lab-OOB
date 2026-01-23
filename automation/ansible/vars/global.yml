@@ -1,0 +1,28 @@
+---
+  ### If using FortiFlex automation scripts, create username/password following this guide
+  ### https://docs.fortinet.com/document/flex-vm/25.4.1/administration-guide/463716/fortiflex-api
+  fortiflex_username: "<insert your fortiflex username>"
+  fortiflex_password: "<insert your fortiflex password>"
+  fortiflex_accountId: <insert your fortiflex accountID>
+  ### You might only have one of the following
+  fortiflex_prepaid_SN: "<insert your fortiflex pre-paidSN>"     
+  fortiflex_postpaid_SN: "<insert your fortiflex post-paidSN>"
+  
+  fortinet_user: admin
+  fortinet_password: password
+  fortinet_timezone: US/Central
+  proxmox_api_user: IaC@pam
+  proxmox_api_token_id: Automation
+  proxmox_api_token_secret: <insert PVE Server API> 
+  proxmox_api_host: pve01          ## == to PVE server name
+  proxmox_clone_type: full
+  proxmox_storage: /var/lib/vz     ## <= not using NAS ## with NAS => /mnt/pve/NFS-VMS
+  proxmox_storage_name: local-lvm  ## <= not using NAS ## with NAS => NFS-VMS 
+  proxmox_format: qcow2 
+  proxmox_ubuntu_template_name: Ubuntu-Template-Cloud-Init ## == name of Ubuntu VM Template
+  proxmox_ubuntu_template_vmid: 492 ## == to vmid of Ubuntu VM Template
+  proxmox_ubuntu_ciuser: fortinet
+  proxmox_ubuntu_cipassword: password 
+  proxmox_ubuntu_search_domains: 'fortinet.internal'
+  proxmox_ubuntu_nameservers: '10.100.55.80'
+  proxmox_IaC_sshkey: '<insert your OOB SSH key here>'

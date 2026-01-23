@@ -1,0 +1,9 @@
+. {
+  auto {
+    directory /etc/coredns/zones
+    reload 60s
+  }
+  forward . 96.45.45.45 96.45.46.46
+  errors
+  log
+}

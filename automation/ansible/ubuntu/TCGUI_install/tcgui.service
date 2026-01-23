@@ -1,0 +1,9 @@
+[Unit]
+Description=tcgui start script
+
+[Service]
+ExecStart=/home/fortinet/tcgui.sh
+
+[Install]
+WantedBy=multi-user.target
+

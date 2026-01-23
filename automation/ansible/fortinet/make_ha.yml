@@ -1,0 +1,38 @@
+---
+
+  - name: Make HA 
+    hosts: "{{ hosts_group }}" 
+    connection: httpapi 
+    collections:
+      - fortinet.fortios
+
+    vars:
+      vdom: "root"
+      ansible_httpapi_use_ssl: true 
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 443 
+      ansible_network_os: fortinet.fortios.fortios
+      ansible_facts_modules: setup
+      # Use the initial login credentials from the inventory
+      ansible_user: "admin"
+      ansible_password: "password"
+#      ansible_httpapi_session_key={"access_token":"YOUR_OWN_VALUE"}
+
+    tasks:
+
+      - name: Configure HA 
+        fortinet.fortios.fortios_system_ha:
+          vdom: "{{ vdom }}"
+          system_ha:
+            mode: "a-p"
+            group_name: "Hub_01"
+            hbdev: "port6 0"
+            override: "disable"
+            password: "fortinet"
+            priority: "{{ ha_priority }}"
+            monitor: ["port1","port2"]
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"

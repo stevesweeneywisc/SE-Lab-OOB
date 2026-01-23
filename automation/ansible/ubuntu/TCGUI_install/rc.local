@@ -1,0 +1,39 @@
+#!/bin/sh
+
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth2 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth3 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth4 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth5 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth6 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth7 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth8 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth9 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth10 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o eth11 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+sudo iptables -A FORWARD -i eth1  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth2  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth3  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth4  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth5  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth6  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth7  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth8  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth9  -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth10 -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth11 -o eth0 -j ACCEPT
+
+sudo tc qdisc add dev eth1  root netem delay 4ms
+sudo tc qdisc add dev eth2  root netem delay 14ms
+sudo tc qdisc add dev eth3  root netem delay 7ms
+sudo tc qdisc add dev eth4  root netem delay 9ms
+sudo tc qdisc add dev eth5  root netem delay 4ms
+sudo tc qdisc add dev eth6  root netem delay 8ms
+sudo tc qdisc add dev eth7  root netem delay 11ms
+sudo tc qdisc add dev eth8  root netem delay 17ms
+sudo tc qdisc add dev eth9  root netem delay 22ms
+sudo tc qdisc add dev eth10 root netem delay 18ms
+sudo tc qdisc add dev eth11 root netem delay 5ms

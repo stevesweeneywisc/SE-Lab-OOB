@@ -1,0 +1,12 @@
+[Unit]
+Description=Dynamic Netplan Configuration Service
+Before=netplan-apply.service
+Wants=netplan-apply.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/generate-dynamic-netplan.sh
+
+[Install]
+WantedBy=multi-user.target
+

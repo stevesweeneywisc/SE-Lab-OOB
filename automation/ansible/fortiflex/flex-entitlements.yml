@@ -1,0 +1,73 @@
+---
+- name: Get information of target entitlements.
+ 
+  hosts: localhost
+ 
+  vars_files:
+    - ../vars/global.yml
+  
+  tasks:
+    - name: Get PrePaid Entitlements List
+      fortinet.fortiflexvm.fortiflexvm_entitlements_list_info:
+        username: "{{ fortiflex_username }}"
+        password: "{{ fortiflex_password }}"
+        accountId: "{{ fortiflex_accountId }}" 
+        programSerialNumber: "{{ fortiflex_prepaid_SN }}" 
+
+        # Optional filter options
+        # description: "you can use description to distinguish entitlements"
+        # serialNumber: "XXXXXX0000000000"
+        # status: "PENDING"
+        # tokenStatus: "NOTUSED"
+      register: result
+
+    - name: Save entitlement info to file on control node
+      copy:
+        content: "{{ result.entitlements }}"
+        dest: /home/fortinet/automation/ansible/fortiflex/entitlements-pre.txt
+      delegate_to: localhost
+
+    - name: Execute local Python script
+      ansible.builtin.script: read-entitlements.py {{ file_name }}
+      args:
+        executable: python3 # Specify the Python interpreter if needed
+      vars:
+        file_name: "entitlements-pre.txt"
+      register: result
+
+    - name: Display response
+      ansible.builtin.debug:
+        var: result.stdout_lines
+
+    - name: Get PostPaid Entitlements List
+      fortinet.fortiflexvm.fortiflexvm_entitlements_list_info:
+        username: "{{ fortiflex_username }}"
+        password: "{{ fortiflex_password }}"
+        accountId: "{{ fortiflex_accountId }}" 
+        programSerialNumber: "{{ fortiflex_postpaid_SN }}" 
+
+        # Optional filter options
+        # description: "you can use description to distinguish entitlements"
+        # serialNumber: "XXXXXX0000000000"
+        # status: "PENDING"
+        # tokenStatus: "NOTUSED"
+      register: result
+
+    - name: Save entitlement info to file on control node
+      copy:
+        content: "{{ result.entitlements }}"
+        dest: /home/fortinet/automation/ansible/fortiflex/entitlements-post.txt
+      delegate_to: localhost
+
+    - name: Execute local Python script
+      ansible.builtin.script: read-entitlements.py {{ file_name }}
+      args:
+        executable: python3 # Specify the Python interpreter if needed
+      vars:
+        file_name: "entitlements-post.txt"
+      register: result
+
+    - name: Display response
+      ansible.builtin.debug:
+        var: result.stdout_lines
+

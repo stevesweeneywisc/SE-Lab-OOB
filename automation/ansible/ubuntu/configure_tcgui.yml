@@ -1,0 +1,40 @@
+---
+  - name: Configure TCGUI 
+    hosts: "{{ group_name }}" 
+    vars_files:
+      - ../vars/global.yml
+    become: yes
+
+    tasks:
+      - name: Copy config/install files to TCGUI
+        ansible.builtin.copy:
+          src: "{{ item }}" #  with_items or with_fileglob, {{ item }} dynamically takes value of each element in the list or each file matched by the glob pattern.
+          
+          dest: /home/fortinet/Downloads/
+          owner: "{{ proxmox_ubuntu_ciuser }}"
+          group: "{{ proxmox_ubuntu_ciuser }}"
+          mode: '0777'
+          force: true
+        with_items:
+          - ./TCGUI_install/main.html
+          - ./TCGUI_install/rc.local
+          - ./TCGUI_install/tcgui_all.sh
+          - ./TCGUI_install/tcgui.service
+          - ./TCGUI_install/tcgui.sh
+#          - ./TCGUI_install/TCGUI_Install.sh
+        register: result 
+
+      - name: Display result of file copy  
+        debug:
+          msg: "{{ result }}"
+  
+      - name: Run script 
+        ansible.builtin.script:
+          cmd:  ./TCGUI_install/TCGUI_Install.sh
+        args:
+          chdir: /home/fortinet/Downloads
+        register: vm_info
+
+      - name: Display register dynamic variable vm_info 
+        debug:
+          msg: "{{ vm_info }}"

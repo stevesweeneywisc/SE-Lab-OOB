@@ -1,0 +1,46 @@
+services:
+   guacd:
+      container_name: guac-d
+      image: guacamole/guacd:1.6.0
+      networks:
+         guac-net:
+      restart: always
+      volumes:
+      - ./drive:/drive:rw
+      - ./record:/record:rw
+            
+   guacamole-sql:
+      container_name: guac-sql
+      image: mysql
+      restart: always
+      environment:
+         MYSQL_ROOT_PASSWORD: password
+      volumes:
+         - /home/fortinet/c_data/guacamole/dbdata:/var/lib/mysql
+      networks:
+         guac-net:
+
+   guacweb:
+      container_name: guac-web
+      image: guacamole/guacamole:1.6.0
+      restart: always
+      ports:
+         - 8080:8080/tcp
+      environment:
+         MYSQL_DATABASE: guacamole_db
+         MYSQL_HOSTNAME: guacamole-sql
+         MYSQL_PASSWORD: password
+         MYSQL_USERNAME: guacamole_user
+         GUACD_HOSTNAME: guac-d
+         RECORDING_SEARCH_PATH: /record
+      depends_on:
+         - guacamole-sql
+         - guacd
+      networks:
+         guac-net:
+      volumes:
+      - ./record:/record:rw
+
+networks:
+   guac-net:
+      driver: bridge

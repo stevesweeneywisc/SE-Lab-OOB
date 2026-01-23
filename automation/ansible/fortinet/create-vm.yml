@@ -1,0 +1,34 @@
+---
+  - name: Create a fortinet device
+    hosts: "{{ pve_node }}"
+    vars_files:
+      - ../vars/global.yml
+      - "{{ host_vars_file }}"
+
+    tasks:
+      - name: Clone template, update cloud init vars 
+        ansible.builtin.include_tasks:
+          file: create-vm-conf.yml
+
+      - name: Import FortiOS qcow2 to SCSI0 
+        ansible.builtin.include_tasks:
+          file: import-qcow2.yml
+
+      - name: Create Log disk as SCSI1 
+        ansible.builtin.include_tasks:
+          file: create-disk.yml
+
+      - name: Mount Bootstrap ISO 
+        ansible.builtin.include_tasks:
+          file: mount-iso.yml
+        when: 
+          - group_name != 'fmg'
+          - group_name != 'faz'
+
+      - name: Configure NICx to VNETs 
+        ansible.builtin.include_tasks:
+          file: set-vnets.yml
+
+      - name: Set Boot Order 
+        ansible.builtin.include_tasks:
+          file: set-boot-order.yml 

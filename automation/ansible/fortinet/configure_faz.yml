@@ -1,0 +1,157 @@
+---
+
+  - name: Configure FortiAnalyzer 
+    hosts: "{{ hosts_group }}" 
+    gather_facts: false
+    connection: httpapi 
+
+    vars_files:
+      - ../vars/global.yml
+
+    vars:
+      ansible_connection: httpapi
+      ansible_httpapi_use_ssl: true 
+      ansible_httpapi_validate_certs: false
+      ansible_httpapi_port: 443 
+      # Use the initial login credentials from the inventory
+      ansible_user: "{{ fortinet_user }}"
+      ansible_password: Fort1net!
+#      ansible_password: "{{ fortinet_password }}"
+      ansible_network_os: fortinet.fortianalyzer.fortianalyzer
+
+    tasks:
+      - name: Port1 Interface configuration.
+        fortinet.fortianalyzer.faz_cli_system_interface:
+          state: present
+          cli_system_interface:
+            allowaccess:
+              - ping
+              - https
+              - http
+              - ssh 
+              - fgfm
+            ip: "10.100.88.2/24"
+            name: port1
+#            status: enable 
+#            mtu: 1500
+#            speed: auto 
+        register: vm_info  
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+#      ###############################################################
+#      DO NOT CONFIGURE INTERFACE USED FOR ANSIBLE (DONE VIA CLI ONLY)
+#      ###############################################################
+#      - name: Port2 Interface configuration.
+#        fortinet.fortimanager.fmgr_system_interface:
+#          bypass_validation: false
+#          state: present
+#          system_interface:
+#            allowaccess:
+#              - ping
+#              - https
+#              - http
+#              - ssh 
+#            ip: "10.100.55.12/24"
+#            name: port2
+#            serviceaccess:
+#              - fgtupdates
+#            status: enable
+#            mtu: 1500
+#            speed: auto 
+#        register: vm_info  
+#
+#      - name: Display register dynamic variable vm_info
+#        debug:
+#          msg: "{{ vm_info }}"
+#
+#      ###############################################################
+
+      - name: Port3 Interface configuration.
+        fortinet.fortianalyzer.faz_cli_system_interface:
+          state: present
+          cli_system_interface:
+            allowaccess:
+              - ping
+              - https
+              - http
+              - ssh 
+              - fgfm
+            ip: "172.16.3.2/24"
+            name: port3
+#            status: enable 
+#            mtu: 1500
+#            speed: auto 
+        register: vm_info  
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+
+      - name: Port4 Interface configuration.
+        fortinet.fortianalyzer.faz_cli_system_interface:
+          state: present
+          cli_system_interface:
+            name: port4
+            status: disable 
+#            mtu: 1500
+#            speed: auto 
+        register: vm_info  
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+
+      - name: Routing table configuration.
+        fortinet.fortianalyzer.faz_cli_system_route:
+          state: present
+          cli_system_route:
+            device: port3
+            dst: "0.0.0.0 0.0.0.0"
+            gateway: 172.16.3.1 
+            seq_num: 1
+        register: vm_info  
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+
+      - name: System Admin configuration.
+        fortinet.fortianalyzer.faz_cli_system_admin_setting:
+          cli_system_admin_setting:
+            idle_timeout_gui: 28800 
+            show_sdwan_manager: enable
+        register: vm_info  
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################
+
+      - name: Configure global attributes.
+        fortinet.fortianalyzer.faz_cli_system_global:
+          enable_log: true
+          cli_system_global:
+            adom_status: enable 
+            adom_select: enable 
+            country_flag: enable
+            daylightsavetime: enable
+            gui_feature_visibility_mode: "per-admin"
+            hostname: "FMG-VM64-KVM"
+            timezone: 08 
+        register: vm_info  
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      ###############################################################

@@ -1,0 +1,109 @@
+---
+
+      - name: Update the FortiGate VM's NIC0
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          interface: net0
+          bridge: "{{ item.vlanconfig0 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the FortiGate VM's NIC1
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          interface: net1
+          bridge: "{{ item.vlanconfig1 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the FortiGate VM's NIC2
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          interface: net2
+          bridge: "{{ item.vlanconfig2 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the FortiGate VM's NIC3
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          interface: net3
+          link_down: "{{ true if (group_name == 'fmg') or (group_name == 'faz') else false }}" 
+          bridge: "{{ item.vlanconfig3 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+
+      - name: Update the FortiGate VM's NIC4 (only if Hub01a or Hub01b)
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          interface: net4
+          bridge: "{{ item.vlanconfig4 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+        when: item.name  == "FGT-Hub-01a" or item.name == "FGT-Hub-01b"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+        when: vm_info.changed 
+
+      - name: Update the FortiGate VM's NIC5 (only if Hub01a or Hub01b)
+        community.proxmox.proxmox_nic:
+          api_user: "{{ proxmox_api_user }}"
+          api_token_id: "{{ proxmox_api_token_id }}"
+          api_token_secret: "{{ proxmox_api_token_secret }}"
+          api_host: "{{ proxmox_api_host }}"
+          vmid: "{{ item.vmid }}"
+          name: "{{ item.name }}"
+          interface: net5
+          bridge: "{{ item.vlanconfig5 }}"
+        register: vm_info
+        loop: "{{ lookup('vars',  group_name)  }}"
+        when: item.name  == "FGT-Hub-01a" or item.name == "FGT-Hub-01b"
+
+      - name: Display register dynamic variable vm_info
+        debug:
+          msg: "{{ vm_info }}"
+        when: vm_info.changed 
+
