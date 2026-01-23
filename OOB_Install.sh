@@ -140,8 +140,9 @@ echo ######application install#########
 
 echo ##########    end     ############
 echo #####Ubuntu Base Install##########
-rm OOB_Install.tar
 rm OOB_Install.sh
+sudo rm README.md
+sudo rm -r .git
 
 echo #################################
 echo ####                         ####

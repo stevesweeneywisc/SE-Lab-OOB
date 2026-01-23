@@ -4,35 +4,11 @@
         - icon: /images/FAZ.png
           href: https://172.16.3.2
           description: ""
-    - FortiAuthenticator:
-        - icon: /images/FAC.png
-          href: https://172.16.3.9
-          description: ""
-    - FortiMail (admin):
-        - icon: /images/FML.png
-          href: https://172.16.3.4/admin
-          description: ""
-    - FortiMail (user):
-        - icon: /images/FML.png
-          href: https://172.16.3.4
-          description: ""
     - FortiManager:
         - icon: /images/FMG.png
           href: https://172.16.3.12
           description: ""
-    - FortiSRA-01:
-        - icon: /images/FSRA.png
-          href: https://172.16.3.19
-          description: ""
-    - FortiSRA-02:
-        - icon: /images/FSRA.png
-          href: https://172.16.3.18
-          description: ""
-    - FortiMonitor:
-        - icon: /images/FMN.png
-          href: https://my.us01.fortimonitor.com
-          description: ""
-
+    
 - FortiGate (GUI):
     - Hub-01a:
         - icon: /images/FGT.png
@@ -58,19 +34,7 @@
         - icon: /images/FGT.png
           href: https://172.16.3.57
           description: ""
-    - Off-Net:
-        - icon: /images/FGT.png
-          href: https://172.16.3.60
-          description: ""
-    - First_Floor:
-        - icon: /images/FGT.png
-          href: https://172.16.3.62
-          description: ""
-    - Fortigate Rugged - 70G:
-        - icon: /images/FGT.png
-          href: https://192.168.10.2
-          description: ""
-
+    
 - FortiGate (SSH):
     - Hub-01a:
         - icon: /images/SSH.png
@@ -96,15 +60,7 @@
         - icon: /images/SSH.png
           href: http://172.16.3.80:8080/guacamole/#/client/MzAAYwBteXNxbA
           description: ""
-    - Off_Net:
-        - icon: /images/SSH.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MzMAYwBteXNxbA 
-          description: ""
-    - First_Floor:
-        - icon: /images/SSH.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MzQAYwBteXNxbA
-          description: ""
-
+    
 - Endpoints (RDP):
     - ubuntu-00:
         - icon: /images/Ubuntu.png
@@ -130,29 +86,9 @@
         - icon: /images/Ubuntu.png
           href: http://172.16.3.80:8080/guacamole/#/client/MTkAYwBteXNxbA
           description: ""
-    - ubuntu-12:
-        - icon: /images/Ubuntu.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MTAAYwBteXNxbA
-          description: ""
-    - ubuntu-14:
-        - icon: /images/Ubuntu.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MTIAYwBteXNxbA
-          description: ""
     - ubuntu-21:
         - icon: /images/Ubuntu.png
           href: http://172.16.3.80:8080/guacamole/#/client/MTEAYwBteXNxbA
-          description: ""
-    - ubuntu-22:
-        - icon: /images/Ubuntu.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MzkAYwBteXNxbA
-          description: ""
-    - Win10:
-        - icon: /images/Desktop-00.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MwBjAG15c3Fs
-          description: ""
-    - Windows 2019:
-        - icon: /images/Windows-Server.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MQBjAG15c3Fs 
           description: ""
 
 - Endpoints (SSH):
@@ -180,21 +116,9 @@
         - icon: /images/SSH.png
           href: http://172.16.3.80:8080/guacamole/#/client/NQBjAG15c3Fs
           description: ""
-    - ubuntu-12:
-        - icon: /images/SSH.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MjAAYwBteXNxbA
-          description: ""
-    - ubuntu-14:
-        - icon: /images/SSH.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MjEAYwBteXNxbA
-          description: ""
     - ubuntu-21:
         - icon: /images/SSH.png
           href: http://172.16.3.80:8080/guacamole/#/client/MjIAYwBteXNxbA
-          description: ""
-    - Win10:
-        - icon: /images/SSH.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MjMAYwBteXNxbA
           description: ""
 
 - Tools:
@@ -218,22 +142,6 @@
         - icon: /images/SSH.png
           href: http://172.16.3.80:8080/guacamole/#/client/NABjAG15c3Fs
           description: ""
-    - Kali-01:
-        - icon: /images/Kali.png
-          href: http://172.16.3.80:8080/guacamole/#/client/MzIAYwBteXNxbA 
-          description: ""
-    - DVWA:
-        - icon: /images/DVWA.png
-          href: http://172.16.3.85 
-          description: ""
-    - Ubuntu-IaC (RDP):
-        - icon: /images/Ubuntu.png
-          href: http://172.16.3.80:8080/guacamole/#/client/NDEAYwBteXNxbA
-          description: ""
-    - Ubuntu-IaC (SSH):
-        - icon: /images/SSH.png
-          href: http://172.16.3.80:8080/guacamole/#/client/NDIAYwBteXNxbA
-          description: ""
 
 - Infrastructure:
     - FG-91G:
@@ -243,27 +151,4 @@
     - Guacamole:
         - icon: /images/guacamole.png
           href: http://172.16.3.80:8080/guacamole
-          description: ""
-    - FortiMonitor OnSight vCollector:
-        - icon: /images/SSH.png
-          # below is user: root
-          href: http://172.16.3.80:8080/guacamole/#/client/MzYAYwBteXNxbA  
-          # below is user: fortinet
-          # href: http://172.16.3.80:8080/guacamole/#/client/MzUAYwBteXNxbA 
-          description: ""
-    - FortiMonitor Network Configuration Manager:
-        - icon: /images/FMN.png
-          href: https://172.16.3.20:444/
-          description: ""
-    - PVE01 (Mcauliff):
-        - icon: /images/proxmox.png
-          href: https://170.64.108.20:8006
-          description: ""
-    - FG-81F (Mcauliff):
-        - icon: /images/FGT.png
-          href: https://170.64.108.20
-          description: ""
-    - ESXi04:
-        - icon: /images/vmware.png
-          href: https://172.16.3.120
           description: ""
