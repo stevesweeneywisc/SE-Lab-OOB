@@ -21,6 +21,7 @@
           - ./TCGUI_install/tcgui_all.sh
           - ./TCGUI_install/tcgui.service
           - ./TCGUI_install/tcgui.sh
+          - ./TCGUI_install/Lab_Topology.png
 #          - ./TCGUI_install/TCGUI_Install.sh
         register: result 
 

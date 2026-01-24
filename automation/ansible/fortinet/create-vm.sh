@@ -49,4 +49,4 @@ echo "image_name       : $4";
 ### Enable verbose execution of script ###
 set -v
 
-ansible-playbook $yml_file.yml -i ../inventory/pve.yml --extra-vars "host_vars_file=$1 pve_node=$2 group_name=$3 image_name=$4"
+ansible-playbook $yml_file.yml --extra-vars "host_vars_file=$1 pve_node=$2 group_name=$3 image_name=$4"
