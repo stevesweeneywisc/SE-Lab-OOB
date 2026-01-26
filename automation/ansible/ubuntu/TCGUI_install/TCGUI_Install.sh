@@ -45,7 +45,7 @@ echo #### add tcgui.master file ######
 sudo mkdir ../Documents/tcgui-master
 sudo git clone https://github.com/tum-lkn/tcgui ../Documents/tcgui-master
 sudo mv ./main.html ../Documents/tcgui-master/templates/
-sudo mv ./Lab_Topology.png ../Documents/tcgui-master/templates/
+sudo mv ./Lab_Topology.png ../Documents/tcgui-master/static/
 chmod 755 ./tcgui.sh
 mv ./tcgui.sh ../
 chmod 755 ./tcgui_all.sh
