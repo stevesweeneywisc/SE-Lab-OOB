@@ -1,7 +1,6 @@
 #! /bin/bash
 
-yml_file="$(echo "$0" | sed 's/\(.*\)\..*/\1/').yml"
-variable1="Type of Entitlement"
+variable1="FortiFlex Password"
 
 ###### Display Help ######
 Help()
@@ -13,8 +12,7 @@ Help()
   echo "-----"
   echo "$0 [$variable1]" 
   echo " " 
-  echo "Example 1:  $0   pre   <= Prepaid  Entitlement"
-  echo "Example 2:  $0   post  <= Postpaid Entitlement"
+  echo "Example 1:  $0  <cut paste $variable1>" 
   echo " "
 } 
 
@@ -32,7 +30,7 @@ do
 	exit;; 
   esac
 done
-if (($# != 0))
+if (($# != 1))
 then
    echo "Number of arguments should be 1"
    Help
@@ -45,9 +43,4 @@ echo "$variable1  : $1";
 ### Enable verbose execution of script ###
 set -v
 
-echo "$yml_file.yml"
-#ansible-playbook flex-entitlements.yml
-
-# ansible-playbook $yml_file -i ../inventory/pve.yml --extra-vars "host_vars_file=$1 pve_node=$2 group_name=$3 image_name=$4"
-#ansible-playbook $yml_file --extra-vars "entitlement_type=$1"
-ansible-playbook $yml_file 
+sed -i "/fortiflex_password/c\  fortiflex_password: '$1'" global.yml 
