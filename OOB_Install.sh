@@ -29,6 +29,13 @@ sudo apt install -y python3-requests
 echo ##########     end     ############
 echo ######## Python3 Install ##########
 
+echo ##########   start     ############
+echo #JavaScript/Package Manager Install
+sudo apt install -y nodejs npm
+sudo npm install    express
+sudo npm install
+echo ##########     end     ############
+echo #JavaScript/Package Manager Install
 
 echo ##########   start     ############
 echo ######## Ansible Install ##########
