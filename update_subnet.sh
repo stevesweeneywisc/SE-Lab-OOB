@@ -49,3 +49,5 @@ sed -i "s/172.16.3/$1/g" c_data/coredns/conf/zones/db.fortinet.internal
 sed -i "s/172.16.3/$1/g" c_data/coredns/conf/zones/db.home.internal
 sed -i "s/172.16.3/$1/g" c_data/homepage/config/bookmarks.yaml
 sed -i "s/172.16.3/$1/g" c_data/homepage/config/services.yaml
+sed -i "s/172.16.3/$1/g" automation/ansible/vars/all-hosts.yml
+
