@@ -30,14 +30,6 @@ echo ##########     end     ############
 echo ######## Python3 Install ##########
 
 echo ##########   start     ############
-echo #JavaScript/Package Manager Install
-sudo apt install -y nodejs npm
-sudo npm install    express
-sudo npm install
-echo ##########     end     ############
-echo #JavaScript/Package Manager Install
-
-echo ##########   start     ############
 echo ######## Ansible Install ##########
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install -y ansible
@@ -134,6 +126,16 @@ sudo find ../automation/ -type f -iname "*.lic"       -exec chmod 664 {} \;
 sudo mv c_data ../
 echo ## container/config/script dirs ##
 echo ##########     end     ############
+
+echo ##########   start     ############
+echo #JavaScript/Package Manager Install
+sudo cd /home/fortinet/c_data/foaas/
+sudo apt install -y nodejs npm
+sudo npm install    express
+sudo npm install
+sudo cd /home/fortinet/Downloads/
+echo ##########     end     ############
+echo #JavaScript/Package Manager Install
 
 
 echo ###### start last check   ########

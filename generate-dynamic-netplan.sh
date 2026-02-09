@@ -17,12 +17,8 @@ check_exceptions() {
 # NO_NETPLAN=true
 declare -A exceptions
 exceptions[FortiAnalyzer]=2
-exceptions[FortiAuthenticator]=9
 exceptions[FortiManager]=12
-exceptions[vCollector]=20
 exceptions[TCGUI]=90
-exceptions[Ubuntu-IaC]=101
-exceptions[PVE-IaC]=102
 
 this_machine=`ip a | awk '
    BEGIN { tap=0 }
