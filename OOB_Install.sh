@@ -129,11 +129,11 @@ echo ##########     end     ############
 
 echo ##########   start     ############
 echo #JavaScript/Package Manager Install
-sudo cd /home/fortinet/c_data/foaas/
+cd /home/fortinet/c_data/foaas/
 sudo apt install -y nodejs npm
 sudo npm install    express
 sudo npm install
-sudo cd /home/fortinet/Downloads/
+cd /home/fortinet/Downloads/
 echo ##########     end     ############
 echo #JavaScript/Package Manager Install
 
@@ -151,6 +151,7 @@ echo ##########    end     ############
 echo #####Ubuntu Base Install##########
 rm OOB_Install.sh
 sudo rm README.md
+sudo rm update_subnet.sh
 sudo rm -r .git
 
 echo #################################
